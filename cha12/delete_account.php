@@ -40,7 +40,7 @@
 	<title>Delete Account</title>
 	<script type="text/javascript">
 		window.load = function(){
-			document.getElementById('cancle').onclick = goBlack;
+			document.getElementById('cancle').onclick = goBack;
 		}
 		function foBlack(){
 			history.go(-1);

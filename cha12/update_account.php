@@ -97,7 +97,7 @@
   	die();
   }
 } else {
-	$query = 'SELECT u.user_id, first_name, last_name, email, city, state, hobbies AS my_hobby FROM site_user u JOIN site_user_info i ON u.user_id = i.user_id WHERE uername = "' . mysqli_real_escape_string($_SESSION['username'], $db) . '"';
+	$query = 'SELECT u.user_id, first_name, last_name, email, city, state, hobbies AS my_hobby FROM site_user u JOIN site_user_info i ON u.user_id = i.user_id WHERE username = "' . mysqli_real_escape_string($_SESSION['username'], $db) . '"';
 	$result = mysqli_query($db, $query) or die (mysqli_error($db));
 	$row = mysqli_fetch_assoc($result);
 
@@ -119,7 +119,7 @@
 	</style>
 	<script type="text/javascript">
 		window.onload = function() {
-			document.getElementById('cancle').onclick = goBack;
+			document.getElementById('cancel').onclick = goBack;
 		}
 		function goBack(){
 			history.go(-1);
@@ -201,7 +201,7 @@
 				<td>
 					<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 					<input type="submit" name="submit" value="Update">
-					<input type="button" name="cancle" value="Cancle">
+					<input type="button" name="cancel" value="Cancel">
 				</td>
 			</tr>
 		</table>

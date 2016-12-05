@@ -20,7 +20,7 @@
  	<p><a href="main.php">Click here</a> to return to the home page</p>
 
  	<?php 
- 		$query = 'SELECT username, firstname, lastname, city, state, email, hobbies FROM site_user u JOIN site_user_info i ON u.user_id = i.user_id WHERE username = "' . mysqli_real_escape_string($_SESSION['username'], $db) . '"';
+ 		$query = 'SELECT username, first_name, last_name, city, state, email, hobbies FROM site_user u JOIN site_user_info i ON u.user_id = i.user_id WHERE username = "' . mysqli_real_escape_string($_SESSION['username'], $db) . '"';
  		$result = mysqli_query($db, $query)) or die(mysqli_error($db));
 		
 		$row = mysqli_fetch_array($result);
@@ -29,8 +29,8 @@
 		mysqli_close($db);
  	 ?>
  	 <ul>
- 	 	<li>First Name: <?php echo $firstname; ?></li>
- 	 	<li>Last Name: <?php echo $lastname; ?></li>
+ 	 	<li>First Name: <?php echo $first_name; ?></li>
+ 	 	<li>Last Name: <?php echo $last_name; ?></li>
  	 	<li>City: <?php echo $city; ?></li>
  	 	<li>State Name: <?php echo $state; ?></li>
  	 	<li>Email Name: <?php echo $email; ?></li>
