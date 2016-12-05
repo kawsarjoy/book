@@ -96,7 +96,11 @@
   	die();
   }
 } else {
+<<<<<<< HEAD
 	$query = 'SELECT u.user_id, first_name, last_name, email, city, state, hobbies AS my_hobby FROM site_user u JOIN site_user_info i ON u.user_id = i.user_id WHERE username = "' . mysqli_real_escape_string($db, $_SESSION['username']) . '"';
+=======
+	$query = 'SELECT u.user_id, first_name, last_name, email, city, state, hobbies AS my_hobby FROM site_user u JOIN site_user_info i ON u.user_id = i.user_id WHERE username = "' . mysqli_real_escape_string($_SESSION['username'], $db) . '"';
+>>>>>>> origin/master
 	$result = mysqli_query($db, $query) or die (mysqli_error($db));
 	$row = mysqli_fetch_assoc($result);
 

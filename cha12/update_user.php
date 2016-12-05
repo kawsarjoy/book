@@ -1,4 +1,5 @@
 <?php 
+<<<<<<< HEAD
 	//include 'auth.inc.php';
 
 	// if($_SESSION['admin_level'] < 1){
@@ -7,6 +8,16 @@
 	// 	echo '<p>You are being redirected to the main page. If your browser doesn\'t redirect automatically, Please <a href="main.php>Click here</a></p>.';
 	// 	die();
 	// }
+=======
+	include 'auth.inc.php';
+
+	if($_SESSION['admin_level'] < 1){
+		header('Refresh:5; UTL=user_personal.php');
+		echo '<p><strong>You are not authorized for this page.</strong></p>';
+		echo '<p>You are being redirected to the main page. If your browser doesn\'t redirect automatically, Please <a href="main.php>Click here</a></p>.';
+		die();
+	}
+>>>>>>> origin/master
 	include 'db.inc.php';
 
 	$db = mysqli_connect(MYSQLI_HOST, MYSQLI_USER, MYSQLI_PASSWORD) or die ('Unable to connect, Please check your connection parameters.');
@@ -64,6 +75,7 @@
  mysqli_free_result($result);
 
  if (empty($first_name)) {
+<<<<<<< HEAD
  	$errors[] = 'First name cannot be blank.';
  }
  if (empty($last_name)) {
@@ -71,6 +83,15 @@
  }
  if (empty($email)) {
  	$errors[] = 'Email Address cannot be blank.';
+=======
+ 	$errors[] 'First name cannot be blank.';
+ }
+ if (empty($last_name)) {
+ 	$errors[] 'Last name cannot be blank.';
+ }
+ if (empty($email)) {
+ 	$errors[] 'Email Address cannot be blank.';
+>>>>>>> origin/master
  }
  if(count($errors) > 0){
  	echo '<p><strong style="color:#FF000;">Unable to update the account information.</strong></p>';
@@ -83,11 +104,16 @@
  } else {
  	// no errors so enter the information into database
  	if(!empty($password)){
+<<<<<<< HEAD
  		$query = 'UPDATE site_user SET password = PASSWORD("' . mysqli_real_escape_string($db, $password) . '") WHERE user_id=' . $user_id;
+=======
+ 		$query = 'UPDATE site_user SET password = PASSWORD("' . mysqli_real_escape_string($password, $db) . '") WHERE user_id=' . $user_id;
+>>>>>>> origin/master
  		mysqli_query($db, $query) or die (mysqli_error($db));
  	}
 
  	$query = 'UPDATE site_user u, site_user_info SET
+<<<<<<< HEAD
  	 username = "' . mysqli_real_escape_string($db, $username) . '",
  	 first_name = "' . mysqli_real_escape_string($db, $first_name) . '",
  	 last_name = "' . mysqli_real_escape_string($db, $last_name) . '",
@@ -95,6 +121,15 @@
  	 state = "' . mysqli_real_escape_string($db, $state) . '",
  	 sity = "' . mysqli_real_escape_string($db, $city) . '",
  	 hobbies = "' . mysqli_real_escape_string($db, join(',', $hobbies)) . '" WHERE user_id = ' . $user_id;
+=======
+ 	 username = "' . mysqli_real_escape_string($username, $db) . '",
+ 	 first_name = "' . mysqli_real_escape_string($first_name, $db) . '",
+ 	 last_name = "' . mysqli_real_escape_string($last_name, $db) . '",
+ 	 email = "' . mysqli_real_escape_string($email, $db) . '",
+ 	 state = "' . mysqli_real_escape_string($state, $db) . '",
+ 	 sity = "' . mysqli_real_escape_string($city, $db) . '",
+ 	 hobbies = "' . mysqli_real_escape_string(join(',', $hobbies), $db) . '" WHERE user_id = ' . $user_id;
+>>>>>>> origin/master
  	 mysqli_query($db, $query) or die (mysqli_error($db));
  	 mysqli_close($db);
 ?>
@@ -111,7 +146,10 @@
 </html>
 <?php 
 	die();
+<<<<<<< HEAD
 	}
+=======
+>>>>>>> origin/master
 } else {
 	$user_id = (isset($_GET['id']) ? $_GET['user_id'] : 0);
 	if($user_id == 0){

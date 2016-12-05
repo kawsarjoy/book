@@ -9,7 +9,11 @@
 	mysqli_query($db, $query) or die (mysqli_error($db));
 
 	// give one of our test account administrators previleges
+<<<<<<< HEAD
 	$query = 'UPDATE site_user SET admin_level = 1 WHERE username = "admin"';
+=======
+	$query = 'UPDATE site_user SET admin_level = 1 WHERE username = "john"';
+>>>>>>> origin/master
 	mysqli_query($db, $query) or die (mysqli_error($db));
 
 	echo 'Success!';
