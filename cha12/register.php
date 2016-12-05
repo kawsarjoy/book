@@ -10,7 +10,7 @@
 	$hobbies_list = array('Conputers', 'Dancing', 'Exercise','Flying', 'Golfimg', 'Hunting', 'Internet', 'Reading', 'Traveling', 'Other than listed');
 
 	// filter incoming list
-
+	//echo 'hi';
 	$username = (isset($_POST['username']) ? trim($_POST['username']) : '');
 	$password = (isset($_POST['password']) ? trim($_POST['password']) : '');
 	$first_name = (isset($_POST['first_name']) ? trim($_POST['first_name']) : '');
@@ -21,6 +21,7 @@
 	$hobbies = (isset($_POST['hobbies']) && is_array($_POST['hobbies'])) ? $_POST['hobbies'] : array();
 
 	if(isset($_POST['submit']) && $_POST['submit'] == 'Register'){
+		//echo 'submit';
 		$errors = array();
 
 		// make sure manditory have been entered
@@ -33,7 +34,7 @@
 		$query = 'SELECT username FROM site_user WHERE username = "' . $_POST['username'] . '"';
 		$result = mysqli_query($db, $query) or die (mysqli_error($db));
 
-		if(mysqli_num_query($result) > 0){
+		if(mysqli_num_rows($result) > 0){
 			$errors[] = 'Username ' . $_POST['username'] . ' is already taken.';
 			$username = '';
 		}
@@ -60,12 +61,13 @@
 			}
 			echo '<ul>';
 		} else {
+			//print_r($_POST);
 			// No errors so enter information to the database
-			$query = 'INSERT INTO site_user (user_id, username, password) VALUES (NULL, "' . mysqli_real_escape_string($username, $db) . '", "' . mysqli_real_escape_string($password, $db) . '")';
+			$query = 'INSERT INTO site_user (user_id, username, password) VALUES (NULL, "' . mysqli_real_escape_string($db, $username) . '", PASSWORD("' . mysqli_real_escape_string($db, $password) . '"))';
 			$result = mysqli_query($db, $query) or die (mysqli_error($db));
-			$user_id = mysqli_insert($db);
+			$user_id = mysqli_insert_id($db);
 
-			$query = 'INSERT IGNORE INTO site_user_info (user_id, first_name, last_name, emali, city, state, hobbies) VALUES (' . $user_id . ', "' . mysqli_real_escape_string($first_name, $db) . '", "' . mysqli_real_escape_string($last_name, $db) . '", "' . mysqli_real_escape_string($emali, $db) . '", "' . mysqli_real_escape_string($city, $db) . '", "' . mysqli_real_escape_string($state, $db) . '", "' . mysqli_real_escape_string(join(', ', $hobbies), $db) . '")';
+			$query = 'INSERT IGNORE INTO site_user_info (user_id, first_name, last_name, email, city, state, hobbies) VALUES (' . $user_id . ', "' . mysqli_real_escape_string($db, $first_name) . '", "' . mysqli_real_escape_string($db, $last_name) . '", "' . mysqli_real_escape_string($db, $email) . '", "' . mysqli_real_escape_string($db, $city) . '", "' . mysqli_real_escape_string($db, $state) . '", "' . mysqli_real_escape_string($db, join(', ', $hobbies)) . '")';
 			$result = mysqli_query($db, $query) or die (mysqli_error($db));
 
 			$_SESSION['logged'] = 1;
@@ -120,10 +122,26 @@
  			</tr>
  			<tr>
  				<td>
+ 					<label for="first_name">First name: </label>
+ 				</td>
+ 				<td>
+ 					<input type="text" name="first_name" id="first_name" size="20" maxlength="20" value="<?php echo $first_name; ?>">
+ 				</td>
+ 			</tr>
+ 			<tr>
+ 				<td>
+ 					<label for="last_name">Last name: </label>
+ 				</td>
+ 				<td>
+ 					<input type="text" name="last_name" id="last_name" size="20" maxlength="20" value="<?php echo $last_name; ?>">
+ 				</td>
+ 			</tr>
+ 			<tr>
+ 				<td>
  					<label for="Email">Email: </label>
  				</td>
  				<td>
- 					<input type="text" name="email" id="email" size="20" maxlength="20" value="<?php echo $email; ?>">
+ 					<input type="text" name="email" id="email" size="50" maxlength="50" value="<?php echo $email; ?>">
  				</td>
  			</tr>
  			<tr>
@@ -163,7 +181,7 @@
  			<tr>
  				<td></td>
  				<td>
- 					<input type="submit" name="submit" name="Register">
+ 					<input type="submit" name="submit" value="Register">
  				</td>
  			</tr>
  		</table>
