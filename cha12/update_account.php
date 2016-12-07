@@ -96,11 +96,7 @@
   	die();
   }
 } else {
-<<<<<<< HEAD
 	$query = 'SELECT u.user_id, first_name, last_name, email, city, state, hobbies AS my_hobby FROM site_user u JOIN site_user_info i ON u.user_id = i.user_id WHERE username = "' . mysqli_real_escape_string($db, $_SESSION['username']) . '"';
-=======
-	$query = 'SELECT u.user_id, first_name, last_name, email, city, state, hobbies AS my_hobby FROM site_user u JOIN site_user_info i ON u.user_id = i.user_id WHERE username = "' . mysqli_real_escape_string($_SESSION['username'], $db) . '"';
->>>>>>> origin/master
 	$result = mysqli_query($db, $query) or die (mysqli_error($db));
 	$row = mysqli_fetch_assoc($result);
 
@@ -122,9 +118,9 @@
 		td { vertical-align: top; }
 	</style>
 	<script type="text/javascript">
-		window.onload = function() {
-			document.getElementById('cancel').onclick = goBack;
-		}
+		// window.onload = function() {
+		// 	document.getElementById('cancel').onclick = goBack;
+		// }
 		function goBack(){
 			history.go(-1);
 		}
@@ -155,7 +151,7 @@
 					<label for="first_name">First name: </label>
 				</td>
 				<td>
-					<input type="text" name="first_name" id="first_name" size="20" maxlength="20" value="<?php echo $v; ?>"/>
+					<input type="text" name="first_name" id="first_name" size="20" maxlength="20" value="<?php echo $first_name; ?>"/>
 				</td>
 			</tr>
 			<tr>
@@ -205,7 +201,7 @@
 				<td>
 					<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 					<input type="submit" name="submit" value="Update">
-					<input type="button" name="cancel" value="Cancel">
+					<input type="button" name="cancel" value="Cancel" onclick="goBack()">
 				</td>
 			</tr>
 		</table>

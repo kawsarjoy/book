@@ -20,14 +20,9 @@
  	<p><a href="main.php">Click here</a> to return to the home page</p>
 
  	<?php 
-<<<<<<< HEAD
  	//print_r($_SESSION);
  		$query = 'SELECT username, first_name, last_name, city, state, email, hobbies FROM site_user u JOIN site_user_info i ON u.user_id = i.user_id WHERE username = "' . mysqli_real_escape_string($db, $_SESSION['username']) . '"';
  		$result = mysqli_query($db, $query) or die(mysqli_error($db));
-=======
- 		$query = 'SELECT username, first_name, last_name, city, state, email, hobbies FROM site_user u JOIN site_user_info i ON u.user_id = i.user_id WHERE username = "' . mysqli_real_escape_string($_SESSION['username'], $db) . '"';
- 		$result = mysqli_query($db, $query)) or die(mysqli_error($db));
->>>>>>> origin/master
 		
 		$row = mysqli_fetch_array($result);
 		extract($row);

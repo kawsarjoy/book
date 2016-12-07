@@ -6,12 +6,14 @@
 
 	$sql = 'CREATE TABLE IF NOT EXISTS cms_access_levels (
 	access_level TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
-	access_name VARCHAR(50) NOT NULL DEFAULT "" PRIMARY KEY (access_level)) ENGINE = MyISAM';
+	access_name VARCHAR(50) NOT NULL DEFAULT ""
+	, PRIMARY KEY (access_level))
+	 ENGINE = MyISAM';
 	mysqli_query($db, $sql) or die (mysqli_error($db));
 
 	$sql = 'INSERT IGNORE INTO cms_access_levels (access_level, access_name) VALUES 
 	(1, "User"),
-	(2, "Moderator")
+	(2, "Moderator"),
 	(3, "Administrator")';
 	mysqli_query($db, $sql) or die(mysqli_error($db));
 
@@ -26,7 +28,7 @@
 	mysqli_query($db, $sql) or die (mysqli_error($db));
 
 	$sql = 'INSERT IGNORE INTO cms_users (user_id, email, password, name, access_level) VALUES (NULL, "admin@example.com", PASSWORD("secret"), "Administrator", 3)';
-	mysqli_query($db, $query) or die (mysqli_error($db));
+	mysqli_query($db, $sql) or die (mysqli_error($db));
 
 	$sql = 'CREATE TABLE IF NOT EXISTS cms_articles (
 	article_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -44,12 +46,12 @@
 	)
 	ENGINE = MyISAM';
 
-	mysqli_query($db, $query) or die (mysqli_error($db));
+	mysqli_query($db, $sql) or die (mysqli_error($db));
 
 	$sql = 'CREATE TABLE IF NOT EXISTS cms_comments(
 	comment_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-	article_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-	user_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+	article_id INTEGER UNSIGNED NOT NULL,
+	user_id INTEGER UNSIGNED NOT NULL,
 	comment_date DATETIME NOT NULL,
 	comment_text MEDIUMTEXT,
 

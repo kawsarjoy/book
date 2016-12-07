@@ -9,11 +9,7 @@
 	}
 
 	include 'db.inc.php';
-<<<<<<< HEAD
 	$db = mysqli_connect(MYSQLI_HOST, MYSQLI_USER, MYSQLI_PASSWORD) or die ('Unable to connect, Please check your connection parameters.');
-=======
-	$db = mysqli_connect(MYSQLI_HOST, MYSQLI_USER, MYSQLI_HOST) or die ('Unable to connect, Please check your connection parameters.');
->>>>>>> origin/master
 	mysqli_select_db($db, MYSQLI_DB) or die (mysqli_error($db));
 
  ?>
@@ -40,12 +36,9 @@
 
  		$odd = true;
  		while ($row = mysqli_fetch_array($result)) {
- 			echo ($odd == true) ? '<tr class="odd_row">' : '<tr class="even_row"';
-<<<<<<< HEAD
- 			$odd != $odd;
-=======
- 			$odd = !$odd;
->>>>>>> origin/master
+ 			//print_r($_SESSION);
+ 			echo ($odd == true) ? '<tr class="odd_row">' : '<tr class="even_row">';
+ 			$odd =! $odd;
  			echo '<td><a href = "update_user.php?id=' . $row['user_id'] . '">' . $row['username']  . '</a></td>';
  			echo '<td>' . $row['first_name'] . '</td>';
  			echo '<td>' . $row['last_name'] . '</td>';
